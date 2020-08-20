@@ -9,6 +9,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Excel", "Excel", "{624759B3
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ExcelSetup", "ExcelSetup\ExcelSetup.vdproj", "{2E7F8CB7-D00C-4039-A035-F09AF1BCD26F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Word", "Word", "{49C67F64-BEDE-442C-9667-1E81E2200455}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordWakaTimeAddin", "WordWakaTimeAddin\WordWakaTimeAddin.csproj", "{DC7E0229-9EC1-4BBF-BC9C-B2EF6C7F9557}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "WordSetup", "WordSetup\WordSetup.vdproj", "{5A366D26-B320-4733-8CFC-57856B56155E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,14 @@ Global
 		{DEE30176-8F6F-4789-8D75-AA676C395C3B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E7F8CB7-D00C-4039-A035-F09AF1BCD26F}.Debug|Any CPU.ActiveCfg = Debug
 		{2E7F8CB7-D00C-4039-A035-F09AF1BCD26F}.Release|Any CPU.ActiveCfg = Release
+		{2E7F8CB7-D00C-4039-A035-F09AF1BCD26F}.Release|Any CPU.Build.0 = Release
+		{DC7E0229-9EC1-4BBF-BC9C-B2EF6C7F9557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC7E0229-9EC1-4BBF-BC9C-B2EF6C7F9557}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC7E0229-9EC1-4BBF-BC9C-B2EF6C7F9557}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC7E0229-9EC1-4BBF-BC9C-B2EF6C7F9557}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A366D26-B320-4733-8CFC-57856B56155E}.Debug|Any CPU.ActiveCfg = Debug
+		{5A366D26-B320-4733-8CFC-57856B56155E}.Release|Any CPU.ActiveCfg = Release
+		{5A366D26-B320-4733-8CFC-57856B56155E}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -28,6 +42,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DEE30176-8F6F-4789-8D75-AA676C395C3B} = {624759B3-F0B8-45F0-89FA-76C444C34421}
 		{2E7F8CB7-D00C-4039-A035-F09AF1BCD26F} = {624759B3-F0B8-45F0-89FA-76C444C34421}
+		{DC7E0229-9EC1-4BBF-BC9C-B2EF6C7F9557} = {49C67F64-BEDE-442C-9667-1E81E2200455}
+		{5A366D26-B320-4733-8CFC-57856B56155E} = {49C67F64-BEDE-442C-9667-1E81E2200455}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {408C7B1C-EFBF-4F06-A4EF-66588E0BFA06}

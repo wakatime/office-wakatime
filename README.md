@@ -17,3 +17,8 @@ Contributing
 ------------
 
 To open and build this project, please use Visual Studio 2019.
+
+Troubleshooting
+------------
+
+The installation of an add-in is persisted at `HKEY_CURRENT_USER\Software\Microsoft\Office\<product>\Addins`

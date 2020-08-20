@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Reflection;
 using System.Threading.Tasks;
-using ExcelWakaTimeAddin.Forms;
+using Word = Microsoft.Office.Interop.Word;
 using WakaTime.Forms;
-using Excel = Microsoft.Office.Interop.Excel;
 using WakaTime.Shared.ExtensionUtils;
 
-namespace ExcelWakaTimeAddin
+namespace WordWakaTimeAddin
 {
     public partial class WakaTimeAddIn
     {
         internal static SettingsForm SettingsForm;
         internal static WakaTime.Shared.ExtensionUtils.WakaTime WakaTime;
 
-        private void WakaTimeAddIn_Startup(object sender, EventArgs e)
+        private void WakaTimeAddin_Startup(object sender, System.EventArgs e)
         {
             var configuration = new Configuration
             {
-                EditorName = "excel",
-                PluginName = "excel-wakatime",
+                EditorName = "word",
+                PluginName = "word-wakatime",
                 EditorVersion = Application.Version,
                 PluginVersion = Constants.PluginVersion
             };
@@ -35,13 +34,12 @@ namespace ExcelWakaTimeAddin
             {
                 // Settings Form
                 SettingsForm = new SettingsForm(ref WakaTime);
-                SettingsForm.ConfigSaved += SettingsFormOnConfigSaved;                
+                SettingsForm.ConfigSaved += SettingsFormOnConfigSaved;
 
                 // setup event handlers                
-                Application.WorkbookOpen += ApplicationOnWorkbookOpen;
-                Application.WorkbookAfterSave += ApplicationOnWorkbookAfterSave;
                 Application.WindowActivate += ApplicationOnWindowActivate;
-                Application.WorkbookActivate += ApplicationOnWorkbookActivate;
+                Application.DocumentOpen += ApplicationOnDocumentOpen;
+                Application.DocumentBeforeSave += ApplicationOnDocumentBeforeSave;
 
                 WakaTime.InitializeAsync();
             }
@@ -49,27 +47,16 @@ namespace ExcelWakaTimeAddin
             {
                 WakaTime.Logger.Error("Error Initializing WakaTime", ex);
             }
-        }
+        }        
+
 
         #region Event Handlers
 
-        private static void ApplicationOnWorkbookActivate(Excel.Workbook wb)
+        private static void ApplicationOnWindowActivate(Word.Document doc, Word.Window wn)
         {
             try
             {
-                WakaTime.HandleActivity(wb.FullName, false, string.Empty);
-            }
-            catch (Exception ex)
-            {
-                WakaTime.Logger.Error("ApplicationOnWorkbookActivate", ex);
-            }
-        }
-
-        private static void ApplicationOnWindowActivate(Excel.Workbook wb, Excel.Window wn)
-        {
-            try
-            {
-                WakaTime.HandleActivity(wb.FullName, false, string.Empty);
+                WakaTime.HandleActivity(doc.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
@@ -77,29 +64,29 @@ namespace ExcelWakaTimeAddin
             }
         }
 
-        private static void ApplicationOnWorkbookAfterSave(Excel.Workbook wb, bool success)
+        private void ApplicationOnDocumentOpen(Word.Document doc)
         {
             try
             {
-                WakaTime.HandleActivity(wb.FullName, false, string.Empty);
+                WakaTime.HandleActivity(doc.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
-                WakaTime.Logger.Error("ApplicationOnWorkbookAfterSave", ex);
+                WakaTime.Logger.Error("ApplicationOnDocumentOpen", ex);
             }
         }
 
-        private static void ApplicationOnWorkbookOpen(Excel.Workbook wb)
+        private void ApplicationOnDocumentBeforeSave(Word.Document doc, ref bool saveasui, ref bool cancel)
         {
             try
             {
-                WakaTime.HandleActivity(wb.FullName, false, string.Empty);
+                WakaTime.HandleActivity(doc.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
-                WakaTime.Logger.Error("ApplicationOnWorkbookOpen", ex);
+                WakaTime.Logger.Error("ApplicationOnDocumentBeforeSave", ex);
             }
-        }        
+        }
 
         private static void OnStartupComplete()
         {
@@ -134,22 +121,22 @@ namespace ExcelWakaTimeAddin
         /// the contents of this method with the code editor.
         /// </summary>
         private void InternalStartup()
-        {            
-            Startup += WakaTimeAddIn_Startup;            
+        {
+            Startup += WakaTimeAddin_Startup;
         }
-        
+
         #endregion
-    }
 
-    public static class CoreAssembly
-    {
-        private static readonly Assembly Reference = typeof(CoreAssembly).Assembly;
-        public static readonly Version Version = Reference.GetName().Version;
-    }
+        public static class CoreAssembly
+        {
+            private static readonly Assembly Reference = typeof(CoreAssembly).Assembly;
+            public static readonly Version Version = Reference.GetName().Version;
+        }
 
-    internal static class Constants
-    {
-        internal static readonly string PluginVersion =
-            $"{CoreAssembly.Version.Major}.{CoreAssembly.Version.Minor}.{CoreAssembly.Version.Build}";        
+        internal static class Constants
+        {
+            internal static readonly string PluginVersion =
+                $"{CoreAssembly.Version.Major}.{CoreAssembly.Version.Minor}.{CoreAssembly.Version.Build}";
+        }
     }
 }

@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 #pragma warning disable 414
-namespace ExcelWakaTimeAddin {
+namespace WordWakaTimeAddin {
     
     
     /// 
@@ -25,13 +25,13 @@ namespace ExcelWakaTimeAddin {
         private global::System.Object missing = global::System.Type.Missing;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "16.0.0.0")]
-        internal Microsoft.Office.Interop.Excel.Application Application;
+        internal Microsoft.Office.Interop.Word.Application Application;
         
         /// 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public WakaTimeAddIn(global::Microsoft.Office.Tools.Excel.ApplicationFactory factory, global::System.IServiceProvider serviceProvider) : 
-                base(factory, serviceProvider, "AddIn", "WakaTimeAddin") {
+        public WakaTimeAddIn(global::Microsoft.Office.Tools.Word.ApplicationFactory factory, global::System.IServiceProvider serviceProvider) : 
+                base(factory, serviceProvider, "AddIn", "WakaTimeAddIn") {
             Globals.Factory = factory;
         }
         
@@ -41,7 +41,7 @@ namespace ExcelWakaTimeAddin {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         protected override void Initialize() {
             base.Initialize();
-            this.Application = this.GetHostItem<Microsoft.Office.Interop.Excel.Application>(typeof(Microsoft.Office.Interop.Excel.Application), "Application");
+            this.Application = this.GetHostItem<Microsoft.Office.Interop.Word.Application>(typeof(Microsoft.Office.Interop.Word.Application), "Application");
             Globals.WakaTimeAddIn = this;
             global::System.Windows.Forms.Application.EnableVisualStyles();
             this.InitializeCachedData();
@@ -180,20 +180,19 @@ namespace ExcelWakaTimeAddin {
         private Globals() {
         }
         
-        private static WakaTimeAddIn _WakaTimeAddIn;
+        private static WakaTimeAddIn _wakaTimeAddIn;
         
-        private static global::Microsoft.Office.Tools.Excel.ApplicationFactory _factory;
+        private static global::Microsoft.Office.Tools.Word.ApplicationFactory _factory;
         
         private static ThisRibbonCollection _ThisRibbonCollection;
         
-        internal static WakaTimeAddIn WakaTimeAddIn
-        {
+        internal static WakaTimeAddIn WakaTimeAddIn {
             get {
-                return _WakaTimeAddIn;
+                return _wakaTimeAddIn;
             }
             set {
-                if ((_WakaTimeAddIn == null)) {
-                    _WakaTimeAddIn = value;
+                if ((_wakaTimeAddIn == null)) {
+                    _wakaTimeAddIn = value;
                 }
                 else {
                     throw new System.NotSupportedException();
@@ -201,7 +200,7 @@ namespace ExcelWakaTimeAddin {
             }
         }
         
-        internal static global::Microsoft.Office.Tools.Excel.ApplicationFactory Factory {
+        internal static global::Microsoft.Office.Tools.Word.ApplicationFactory Factory {
             get {
                 return _factory;
             }
