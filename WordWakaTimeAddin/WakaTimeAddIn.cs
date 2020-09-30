@@ -47,8 +47,7 @@ namespace WordWakaTimeAddin
             {
                 WakaTime.Logger.Error("Error Initializing WakaTime", ex);
             }
-        }        
-
+        }
 
         #region Event Handlers
 
@@ -64,7 +63,7 @@ namespace WordWakaTimeAddin
             }
         }
 
-        private void ApplicationOnDocumentOpen(Word.Document doc)
+        private static void ApplicationOnDocumentOpen(Word.Document doc)
         {
             try
             {
@@ -76,11 +75,11 @@ namespace WordWakaTimeAddin
             }
         }
 
-        private void ApplicationOnDocumentBeforeSave(Word.Document doc, ref bool saveasui, ref bool cancel)
+        private static void ApplicationOnDocumentBeforeSave(Word.Document doc, ref bool saveasui, ref bool cancel)
         {
             try
             {
-                WakaTime.HandleActivity(doc.FullName, false, string.Empty);
+                WakaTime.HandleActivity(doc.FullName, true, string.Empty);
             }
             catch (Exception ex)
             {

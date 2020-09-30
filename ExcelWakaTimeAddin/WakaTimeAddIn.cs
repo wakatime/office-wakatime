@@ -81,7 +81,7 @@ namespace ExcelWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(wb.FullName, false, string.Empty);
+                WakaTime.HandleActivity(wb.FullName, true, string.Empty);
             }
             catch (Exception ex)
             {

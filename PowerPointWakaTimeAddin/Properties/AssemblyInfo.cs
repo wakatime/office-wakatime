@@ -6,11 +6,11 @@ using System.Security;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ExcelWakaTimeAddin")]
+[assembly: AssemblyTitle("PowerPointWakaTimeAddin")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("WakaTime")]
-[assembly: AssemblyProduct("ExcelWakaTimeAddin")]
+[assembly: AssemblyProduct("PowerPointWakaTimeAddin")]
 [assembly: AssemblyCopyright("Copyright © WakaTime 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +21,7 @@ using System.Security;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4c20d088-8275-48b8-af1a-9ba8c854281b")]
+[assembly: Guid("b89b6cba-37d0-4c76-9f0a-fae288ded9fb")]
 
 // Version information for an assembly consists of the following four values:
 //
