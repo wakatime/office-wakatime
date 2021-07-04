@@ -256,13 +256,13 @@
         "Entry"
         {
         "MsmKey" = "8:_19FCB41050D774226C704C9ADCEB42F8"
-        "OwnerKey" = "8:_1DBD49B65F0FED2561326531D916E910"
+        "OwnerKey" = "8:_9A6EA0E66E7E779B3E3FC80A808855A3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_19FCB41050D774226C704C9ADCEB42F8"
-        "OwnerKey" = "8:_9A6EA0E66E7E779B3E3FC80A808855A3"
+        "OwnerKey" = "8:_1DBD49B65F0FED2561326531D916E910"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -670,12 +670,6 @@
         "Entry"
         {
         "MsmKey" = "8:_76285E325C26607AFDB4A71AA92682A3"
-        "OwnerKey" = "8:_1DBD49B65F0FED2561326531D916E910"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_76285E325C26607AFDB4A71AA92682A3"
         "OwnerKey" = "8:_B9D9C867DF6673BDB718A83BB9111DFD"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -683,6 +677,12 @@
         {
         "MsmKey" = "8:_76285E325C26607AFDB4A71AA92682A3"
         "OwnerKey" = "8:_9A6EA0E66E7E779B3E3FC80A808855A3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_76285E325C26607AFDB4A71AA92682A3"
+        "OwnerKey" = "8:_1DBD49B65F0FED2561326531D916E910"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -832,13 +832,13 @@
         "Entry"
         {
         "MsmKey" = "8:_879D5AE644536729EF63CF909689FF35"
-        "OwnerKey" = "8:_1DBD49B65F0FED2561326531D916E910"
+        "OwnerKey" = "8:_9A6EA0E66E7E779B3E3FC80A808855A3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_879D5AE644536729EF63CF909689FF35"
-        "OwnerKey" = "8:_9A6EA0E66E7E779B3E3FC80A808855A3"
+        "OwnerKey" = "8:_1DBD49B65F0FED2561326531D916E910"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1324,12 +1324,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1DBD49B65F0FED2561326531D916E910"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_FE7143D1D9939CC1D467CF8A1B1416EB"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1451,6 +1445,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_6983EF71F4584AB085DC4EAFE14E052D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_1DBD49B65F0FED2561326531D916E910"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -7368,15 +7368,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ExcelWakaTimeAddin"
-        "ProductCode" = "8:{C091A29C-BCC6-4237-BD85-DD3157C7C851}"
-        "PackageCode" = "8:{CF55ABEC-6BD9-4793-9C7D-B7439BEE694C}"
+        "ProductCode" = "8:{70DE97BD-2993-4446-B3A7-FF625F8BC1C8}"
+        "PackageCode" = "8:{6E241806-E86F-4734-BD20-EAB3F1CA2FC3}"
         "UpgradeCode" = "8:{D57AFFBB-C7B1-47DF-B157-F42D65B427EB}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:2.1.0"
+        "ProductVersion" = "8:2.1.1"
         "Manufacturer" = "8:WakaTime"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://wakatime.com/faq"
@@ -7686,7 +7686,7 @@
                             "ContextData" = "8:1;True=1;False=0"
                             "Attributes" = "3:0"
                             "Setting" = "3:0"
-                            "Value" = "3:1"
+                            "Value" = "3:0"
                             "DefaultValue" = "3:1"
                             "UsePlugInResources" = "11:TRUE"
                             }
