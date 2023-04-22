@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace PowerPointWakaTimeAddin.Forms
@@ -29,12 +30,12 @@ namespace PowerPointWakaTimeAddin.Forms
         {
             try
             {
-                var parse = Guid.TryParse(txtAPIKey.Text.Trim(), out var apiKey);                              
-                if (parse)
+                var matched = Regex.IsMatch(txtAPIKey.Text.Trim(), "(?im)^(waka_)?[0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12}$");                              
+                if (matched)
                 {
-                    _wakaTime.Config.ApiKey = apiKey.ToString();
+                    _wakaTime.Config.ApiKey = txtAPIKey.Text.Trim();
                     _wakaTime.Config.Save();
-                    _wakaTime.Config.ApiKey = apiKey.ToString();
+                    _wakaTime.Config.ApiKey = txtAPIKey.Text.Trim();
                 }
                 else
                 {

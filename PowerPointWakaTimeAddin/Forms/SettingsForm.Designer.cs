@@ -61,7 +61,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAPIKey.Location = new System.Drawing.Point(310, 32);
             this.txtAPIKey.Margin = new System.Windows.Forms.Padding(8);
-            this.txtAPIKey.MaxLength = 36;
+            this.txtAPIKey.MaxLength = 41;
             this.txtAPIKey.Name = "txtAPIKey";
             this.txtAPIKey.Size = new System.Drawing.Size(1213, 47);
             this.txtAPIKey.TabIndex = 1;
