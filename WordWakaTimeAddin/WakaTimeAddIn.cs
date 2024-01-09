@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Word = Microsoft.Office.Interop.Word;
 using WakaTime.Forms;
 using WakaTime.Shared.ExtensionUtils;
+using WakaTime.ExtensionUtils;
 
 namespace WordWakaTimeAddin
 {
@@ -12,9 +13,9 @@ namespace WordWakaTimeAddin
         internal static SettingsForm SettingsForm;
         internal static WakaTime.Shared.ExtensionUtils.WakaTime WakaTime;
 
-        private void WakaTimeAddin_Startup(object sender, System.EventArgs e)
+        private async void WakaTimeAddin_Startup(object sender, System.EventArgs e)
         {
-            var configuration = new Configuration
+            var metadata = new Metadata
             {
                 EditorName = "word",
                 PluginName = "word-wakatime",
@@ -22,26 +23,30 @@ namespace WordWakaTimeAddin
                 PluginVersion = Constants.PluginVersion
             };
 
-            WakaTime = new WakaTime.Shared.ExtensionUtils.WakaTime(null, configuration, new Logger());
+            WakaTime = new WakaTime.Shared.ExtensionUtils.WakaTime(metadata, new Logger(Dependencies.GetConfigFilePath()));
 
             WakaTime.Logger.Debug("Initializing in background thread.");
-            Task.Run(() => { InitializeAsync(); }).ContinueWith(t => OnStartupComplete());
+
+            await InitializeAsync();
+
+            // Prompt for api key if not already set
+            if (string.IsNullOrEmpty(WakaTime.Config.GetSetting("api_key")))
+                PromptApiKey();
         }
 
-        private void InitializeAsync()
+        private async Task InitializeAsync()
         {
             try
             {
                 // Settings Form
-                SettingsForm = new SettingsForm(ref WakaTime);
-                SettingsForm.ConfigSaved += SettingsFormOnConfigSaved;
+                SettingsForm = new SettingsForm(WakaTime.Config, WakaTime.Logger);
 
                 // setup event handlers                
                 Application.WindowActivate += ApplicationOnWindowActivate;
                 Application.DocumentOpen += ApplicationOnDocumentOpen;
                 Application.DocumentBeforeSave += ApplicationOnDocumentBeforeSave;
 
-                WakaTime.InitializeAsync();
+                await WakaTime.InitializeAsync();
             }
             catch (Exception ex)
             {
@@ -55,7 +60,7 @@ namespace WordWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(doc.FullName, false, string.Empty);
+                WakaTime.HandleActivity(doc.FullName, false, "Microsoft Office");
             }
             catch (Exception ex)
             {
@@ -67,7 +72,7 @@ namespace WordWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(doc.FullName, false, string.Empty);
+                WakaTime.HandleActivity(doc.FullName, false, "Microsoft Office");
             }
             catch (Exception ex)
             {
@@ -79,24 +84,12 @@ namespace WordWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(doc.FullName, true, string.Empty);
+                WakaTime.HandleActivity(doc.FullName, true, "Microsoft Office");
             }
             catch (Exception ex)
             {
                 WakaTime.Logger.Error("ApplicationOnDocumentBeforeSave", ex);
             }
-        }
-
-        private static void OnStartupComplete()
-        {
-            // Prompt for api key if not already set
-            if (string.IsNullOrEmpty(WakaTime.Config.ApiKey))
-                PromptApiKey();
-        }
-
-        private static void SettingsFormOnConfigSaved(object sender, EventArgs eventArgs)
-        {
-            WakaTime.Config.Read();
         }
 
         #endregion
@@ -107,7 +100,7 @@ namespace WordWakaTimeAddin
         {
             WakaTime.Logger.Info("Please input your api key into the wakatime window.");
 
-            var form = new ApiKeyForm(ref WakaTime);
+            var form = new ApiKeyForm(WakaTime.Config, WakaTime.Logger);
             form.ShowDialog();
         }
 

@@ -7368,7 +7368,7 @@
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:2.1.1"
+        "ProductVersion" = "8:4.2.1"
         "Manufacturer" = "8:WakaTime"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://wakatime.com/faq"

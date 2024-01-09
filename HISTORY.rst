@@ -3,6 +3,12 @@ History
 -------
 
 
+4.2.1 (2024-01-09)
+++++++++++++++++++
+
+- Update WakaTime.Shared.ExtensionUtils dependency to v4.2.1
+- Adapt to new wakatime key format
+
 2.1.1 (2021-07-04)
 ++++++++++++++++++
 
