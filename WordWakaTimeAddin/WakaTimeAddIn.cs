@@ -60,7 +60,7 @@ namespace WordWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(doc.FullName, false, "Microsoft Office");
+                WakaTime.HandleActivity(doc.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
@@ -72,7 +72,7 @@ namespace WordWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(doc.FullName, false, "Microsoft Office");
+                WakaTime.HandleActivity(doc.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
@@ -84,7 +84,7 @@ namespace WordWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(doc.FullName, true, "Microsoft Office");
+                WakaTime.HandleActivity(doc.FullName, true, string.Empty);
             }
             catch (Exception ex)
             {
