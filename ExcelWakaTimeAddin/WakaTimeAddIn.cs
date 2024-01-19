@@ -61,7 +61,7 @@ namespace ExcelWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(wb.FullName, false, "Microsoft Office");
+                WakaTime.HandleActivity(wb.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
@@ -73,7 +73,7 @@ namespace ExcelWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(wb.FullName, false, "Microsoft Office");
+                WakaTime.HandleActivity(wb.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
@@ -85,7 +85,7 @@ namespace ExcelWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(wb.FullName, true, "Microsoft Office");
+                WakaTime.HandleActivity(wb.FullName, true, string.Empty);
             }
             catch (Exception ex)
             {
@@ -97,7 +97,7 @@ namespace ExcelWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(wb.FullName, false, "Microsoft Office");
+                WakaTime.HandleActivity(wb.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
