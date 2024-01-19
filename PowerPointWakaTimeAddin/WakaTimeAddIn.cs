@@ -5,11 +5,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using PowerPointWakaTimeAddin.Forms;
 using WakaTime.Forms;
 using WakaTime.Shared.ExtensionUtils;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 using Office = Microsoft.Office.Core;
+using WakaTime.ExtensionUtils;
 
 namespace PowerPointWakaTimeAddin
 {
@@ -18,9 +18,9 @@ namespace PowerPointWakaTimeAddin
         internal static SettingsForm SettingsForm;
         internal static WakaTime.Shared.ExtensionUtils.WakaTime WakaTime;
 
-        private void WakaTimeAddIn_Startup(object sender, EventArgs e)
+        private async void WakaTimeAddIn_Startup(object sender, EventArgs e)
         {
-            var configuration = new Configuration
+            var metadata = new Metadata
             {
                 EditorName = "powerpoint",
                 PluginName = "powerpoint-wakatime",
@@ -28,19 +28,23 @@ namespace PowerPointWakaTimeAddin
                 PluginVersion = Constants.PluginVersion
             };
 
-            WakaTime = new WakaTime.Shared.ExtensionUtils.WakaTime(null, configuration, new Logger());
+            WakaTime = new WakaTime.Shared.ExtensionUtils.WakaTime(metadata, new Logger(Dependencies.GetConfigFilePath()));
 
             WakaTime.Logger.Debug("Initializing in background thread.");
-            Task.Run(() => { InitializeAsync(); }).ContinueWith(t => OnStartupComplete());
+
+            await InitializeAsync();
+
+            // Prompt for api key if not already set
+            if (string.IsNullOrEmpty(WakaTime.Config.GetSetting("api_key")))
+                PromptApiKey();
         }
 
-        private void InitializeAsync()
+        private async Task InitializeAsync()
         {
             try
             {
                 // Settings Form
-                SettingsForm = new SettingsForm(ref WakaTime);
-                SettingsForm.ConfigSaved += SettingsFormOnConfigSaved;
+                SettingsForm = new SettingsForm(WakaTime.Config, WakaTime.Logger);
 
                 // setup event handlers
                 Application.PresentationBeforeClose += ApplicationOnPresentationBeforeClose;
@@ -52,7 +56,7 @@ namespace PowerPointWakaTimeAddin
                 Application.SlideShowOnNext += ApplicationOnSlideShowOnNext;
                 Application.SlideShowOnPrevious += ApplicationOnSlideShowOnPrevious;
 
-                WakaTime.InitializeAsync();
+                await WakaTime.InitializeAsync();
             }
             catch (Exception ex)
             {
@@ -158,18 +162,6 @@ namespace PowerPointWakaTimeAddin
             }
         }
 
-        private static void OnStartupComplete()
-        {
-            // Prompt for api key if not already set
-            if (string.IsNullOrEmpty(WakaTime.Config.ApiKey))
-                PromptApiKey();
-        }
-
-        private static void SettingsFormOnConfigSaved(object sender, EventArgs eventArgs)
-        {
-            WakaTime.Config.Read();
-        }
-
         #endregion
 
         #region Methods        
@@ -178,7 +170,7 @@ namespace PowerPointWakaTimeAddin
         {
             WakaTime.Logger.Info("Please input your api key into the wakatime window.");
 
-            var form = new ApiKeyForm(ref WakaTime);
+            var form = new ApiKeyForm(WakaTime.Config, WakaTime.Logger);
             form.ShowDialog();
         }
 

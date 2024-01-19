@@ -3,6 +3,12 @@ History
 -------
 
 
+2.2.0 (unreleased)
+++++++++++++++++++
+
+- Update WakaTime.Shared.ExtensionUtils dependency to v4.2.1
+- Support new api key format with waka_ prefix
+
 2.1.1 (2021-07-04)
 ++++++++++++++++++
 
