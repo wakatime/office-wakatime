@@ -70,7 +70,7 @@ namespace PowerPointWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(wn.Presentation.FullName, false, "Microsoft Office");
+                WakaTime.HandleActivity(wn.Presentation.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
@@ -82,7 +82,7 @@ namespace PowerPointWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(wn.Presentation.FullName, false, "Microsoft Office");
+                WakaTime.HandleActivity(wn.Presentation.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
@@ -94,7 +94,7 @@ namespace PowerPointWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(pres.FullName, false, "Microsoft Office");
+                WakaTime.HandleActivity(pres.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
@@ -106,7 +106,7 @@ namespace PowerPointWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(wn.Presentation.FullName, false, "Microsoft Office");
+                WakaTime.HandleActivity(wn.Presentation.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
@@ -118,7 +118,7 @@ namespace PowerPointWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(pres.FullName, false, "Microsoft Office");
+                WakaTime.HandleActivity(pres.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
@@ -130,7 +130,7 @@ namespace PowerPointWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(pres.FullName, true, "Microsoft Office");
+                WakaTime.HandleActivity(pres.FullName, true, string.Empty);
             }
             catch (Exception ex)
             {
@@ -142,7 +142,7 @@ namespace PowerPointWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(pres.FullName, false, "Microsoft Office");
+                WakaTime.HandleActivity(pres.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
@@ -154,7 +154,7 @@ namespace PowerPointWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(pres.FullName, false, "Microsoft Office");
+                WakaTime.HandleActivity(pres.FullName, false, string.Empty);
             }
             catch (Exception ex)
             {
