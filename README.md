@@ -2,7 +2,7 @@
 
 Metrics, insights, and time tracking automatically generated from your programming activity.
 
-**Only works for Office on Windows, not Mac.**
+***Only works for Office on Windows, not Mac.***
 
 ## Installation
 
