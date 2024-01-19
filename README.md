@@ -2,6 +2,8 @@
 
 Metrics, insights, and time tracking automatically generated from your programming activity.
 
+**Only works for Office on Windows, not Mac.**
+
 ## Installation
 
 1. Download the latest installation setup from [Releases](https://github.com/gandarez/office-wakatime/releases)
