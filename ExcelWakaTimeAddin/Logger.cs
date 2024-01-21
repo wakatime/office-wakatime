@@ -10,15 +10,22 @@ namespace WakaTime.ExtensionUtils
 		private readonly bool _isDebugEnabled;
 		private readonly StreamWriter _writer;
 
-		public Logger(string configFilepath)
+		private readonly string filename = $"{AppDataDirectory}\\excel-wakatime.log";
+
+        public Logger(string configFilepath)
 		{
-			var configFile = new ConfigFile(configFilepath);
+			try
+			{
+                var configFile = new ConfigFile(configFilepath);
 
-			_isDebugEnabled = configFile.GetSettingAsBoolean("debug");
+                _isDebugEnabled = configFile.GetSettingAsBoolean("debug");
 
-			var filename = $"{AppDataDirectory}\\excel-wakatime.log";
-
-			_writer = new StreamWriter(File.Open(filename, FileMode.Append, FileAccess.Write));
+                _writer = new StreamWriter(File.Open(filename, FileMode.Append, FileAccess.Write, FileShare.ReadWrite));
+            }
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
 		}
 
 		private static string AppDataDirectory
@@ -63,15 +70,18 @@ namespace WakaTime.ExtensionUtils
 
 		private void Log(LogLevel level, string msg)
 		{
+			var now = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt", new System.Globalization.CultureInfo("en-US"));
+
 			try
 			{
-				_writer.WriteLine("[Wakatime {0} {1:hh:mm:ss tt}] {2}", Enum.GetName(level.GetType(), level), DateTime.Now, msg);
+				_writer.WriteLine("[Wakatime {0} {1}] {2}", Enum.GetName(level.GetType(), level), now, msg);
 				_writer.Flush();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString(), "Error writing to notepadpp-wakatime.log", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-			}
+                MessageBox.Show(ex.ToString(), $"Error writing to \"{filename}\"", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(ex.ToString(), $"{Enum.GetName(level.GetType(), level)} - {msg}", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
 		}
 
 		public void Close()
