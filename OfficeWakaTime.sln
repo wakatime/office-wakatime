@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30225.117
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelWakaTimeAddin", "ExcelWakaTimeAddin\ExcelWakaTimeAddin.csproj", "{DEE30176-8F6F-4789-8D75-AA676C395C3B}"
 EndProject
@@ -47,6 +47,7 @@ Global
 		{38197028-D696-4BEE-BE02-3C3217641E9E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{82ACD914-7184-4A6C-8912-DFB96EADBF6F}.Debug|Any CPU.ActiveCfg = Debug
 		{82ACD914-7184-4A6C-8912-DFB96EADBF6F}.Release|Any CPU.ActiveCfg = Release
+		{82ACD914-7184-4A6C-8912-DFB96EADBF6F}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
