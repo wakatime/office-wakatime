@@ -61,7 +61,7 @@ namespace ExcelWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(wb.FullName, false, string.Empty);
+                WakaTime.HandleActivity(GetFileLocalPath(wb.FullName), false, string.Empty);
             }
             catch (Exception ex)
             {
@@ -73,7 +73,7 @@ namespace ExcelWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(wb.FullName, false, string.Empty);
+                WakaTime.HandleActivity(GetFileLocalPath(wb.FullName), false, string.Empty);
             }
             catch (Exception ex)
             {
@@ -85,7 +85,7 @@ namespace ExcelWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(wb.FullName, true, string.Empty);
+                WakaTime.HandleActivity(GetFileLocalPath(wb.FullName), true, string.Empty);
             }
             catch (Exception ex)
             {
@@ -97,7 +97,7 @@ namespace ExcelWakaTimeAddin
         {
             try
             {
-                WakaTime.HandleActivity(wb.FullName, false, string.Empty);
+                WakaTime.HandleActivity(GetFileLocalPath(wb.FullName), false, string.Empty);
             }
             catch (Exception ex)
             {
@@ -117,6 +117,68 @@ namespace ExcelWakaTimeAddin
             form.ShowDialog();
         }
 
+        private static string GetFileLocalPath(string rawPath)
+        {
+            try
+            {
+                var workbookUri = new Uri(rawPath);
+                // If local file, return it as-is
+                if (workbookUri.IsFile)
+                    return rawPath;
+
+                string localPath = string.Empty;
+                // Registry key names to loop                
+                System.Collections.Generic.List<string> keyNames = new System.Collections.Generic.List<string>() { "OneDrive", "OneDriveCommercial", "OneDriveConsumer", "onedrive" };
+                foreach (var keyName in keyNames)
+                {
+                    using (var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("Environment", false))
+                    {
+                        var rootDirectory = key.GetValue(keyName).ToString();
+                        if (string.IsNullOrEmpty(rootDirectory) == false && System.IO.Directory.Exists(rootDirectory))
+                        {
+                            if (keyName == "OneDrive")
+                            {
+                                int index = workbookUri.LocalPath.IndexOf('/', 1);
+                                if (index > 0)
+                                {
+                                    string subPath = workbookUri.LocalPath.Substring(index);
+                                    localPath = string.Format("{0}{1}", rootDirectory, subPath);
+                                    localPath = localPath.Replace("/", "\\"); // slashes in the right direction
+                                    if (System.IO.File.Exists(localPath))
+                                        return localPath;
+                                }
+                            }
+
+                            var pathParts = new System.Collections.Generic.Queue<string>(workbookUri.LocalPath.Split('/'));
+                            do
+                            {
+                                // Compose a local path by adding root directory and slashes in between                                
+                                string subPath = string.Join("\\", pathParts);
+                                if (subPath[0] != '\\')
+                                {
+                                    subPath = "\\" + subPath;
+                                }
+                                localPath = string.Format("{0}{1}", rootDirectory, subPath);
+
+                                if (System.IO.File.Exists(localPath))
+                                    return localPath;
+
+                                // The file was not found - get rid of leftmost part of the path and try again
+                                pathParts.Dequeue();
+                            }
+                            while (pathParts?.Count > 0);
+
+                        }
+                    }
+                }
+                return localPath;
+            }
+            catch (Exception ex)
+            {
+                return rawPath;
+            }
+        }
+
         #endregion
 
         #region VSTO generated code
@@ -126,10 +188,10 @@ namespace ExcelWakaTimeAddin
         /// the contents of this method with the code editor.
         /// </summary>
         private void InternalStartup()
-        {            
-            Startup += WakaTimeAddIn_Startup;            
+        {
+            Startup += WakaTimeAddIn_Startup;
         }
-        
+
         #endregion
     }
 
@@ -142,6 +204,6 @@ namespace ExcelWakaTimeAddin
     internal static class Constants
     {
         internal static readonly string PluginVersion =
-            $"{CoreAssembly.Version.Major}.{CoreAssembly.Version.Minor}.{CoreAssembly.Version.Build}";        
+            $"{CoreAssembly.Version.Major}.{CoreAssembly.Version.Minor}.{CoreAssembly.Version.Build}";
     }
 }
